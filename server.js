@@ -14,18 +14,17 @@ app.use(express.static('./public'));
 
 function handleLocationRequest(query){
     const geoData = require('./data/geo.json');
-    //console.log(geoData);
+
     const location = new Location(geoData.results[0]);
     return location;
   }
- // let weatherLocation = [];
+
 
   function Location(coordinates){
-    this.city = coordinates.formatted_Address;
+    this.formatted_query = coordinates.formatted_address;
     this.latitude = coordinates.geometry.location.lat;
     this.longitude = coordinates.geometry.location.lng;
-    // weatherLocation.push(this.latitude);
-    // weatherLocation.push(this.longitude);
+
   }
 
   function Weather(location){
