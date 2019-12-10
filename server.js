@@ -40,12 +40,9 @@ function locationResponse(request, response){
 }
 
 
+
 app.get('/location', locationResponse);
+
 app.get('/weather', weatherSearch);
-
-
-
-
-
 
 app.listen(PORT,() => console.log('server initiated'));
