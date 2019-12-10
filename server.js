@@ -26,14 +26,13 @@ function handleLocationRequest(query){
     this.longitude = coordinates.geometry.location.lng;
   }
 
-function responseF(request, response){
+function responseFunction(request, response){
     const locData = handleLocationRequest(search.query.data);
     response.send(locData);
 }
 
-//app.get('/webpage', (request, response) => response.send({response:'response to action'}));
-//app.get('/index', (request, response) => response.sendFile(__dirname + '/public/index.html'));
-app.get('/location', responseF);
+
+app.get('/location', responseFunction);
 
 
 
