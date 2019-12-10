@@ -21,13 +21,13 @@ function handleLocationRequest(query){
   }
   
   function Location(coordinates){
-    this.city = city;
+    this.city = coordinates.formatted_Address;
     this.latitude = coordinates.geometry.location.lat;
     this.longitude = coordinates.geometry.location.lng;
   }
 
 function responseFunction(request, response){
-    const locData = handleLocationRequest(search.query.data);
+    const locData = handleLocationRequest(request.query.data);
     response.send(locData);
 }
 
