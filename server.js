@@ -12,13 +12,6 @@ require('dotenv').config();
 
 app.use(express.static('./public'));
 
-function handleLocationRequest(query){
-    const geoData = require('./data/geo.json');
-
-    const location = new Location(geoData.results[0]);
-    return location;
-  }
-
 
   function Location(coordinates){
     this.formatted_query = coordinates.formatted_address;
@@ -33,25 +26,23 @@ function handleLocationRequest(query){
   }
 
 function weatherSearch(request, response){
-    const weather = weatherResponse(request.query.data);
-    response.send(weather);
-}
-
-  function weatherResponse(location){
     let darkSky = require('./data/darksky.json');
     let weatherArray = [];
     darkSky.daily.data.forEach(forecast => weatherArray.push(new Weather(forecast)));
-    return weatherArray; 
-  }
+    response.send(weatherArray);
+}
 
-function responseFunction(request, response){
-    const locData = handleLocationRequest(request.query.data);
-    response.send(locData);
+function locationResponse(request, response){
+    //const locData = handleLocationRequest(request.query.data);
+    const geoData = require('./data/geo.json');
+    const location = new Location(geoData.results[0]);
+    response.send(location);
 }
 
 
 
-app.get('/location', responseFunction);
+app.get('/location', locationResponse);
+
 app.get('/weather', weatherSearch);
 
 app.listen(PORT,() => console.log('server initiated'));
