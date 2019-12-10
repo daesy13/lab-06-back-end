@@ -50,6 +50,7 @@ function responseFunction(request, response){
 }
 
 
+
 app.get('/location', responseFunction);
 app.get('/weather', weatherSearch);
 
